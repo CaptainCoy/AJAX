@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basic AJAX Demo</title>
+		<link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main">
+			<h2>Get The Latest Content:</h2>
+			<div class='content' id="content">
+				<input type="button" class="button" value="Get Content" id="btn_content" onclick="getContent();"/>
+			</div>
+        
+
+            <div class="content" id="exercise">
+                <h1>More AJAX</h1>
+                <button type="button" class="button" onclick="getFit();">Click Here</button>
+            </div>
+        </div>
+                
+		<script type="text/javascript">
+
+            // Step 1: setup the xml http request object
+            var ajax = new XMLHttpRequest();
+
+            // Step 2: Prepare the open ajax request
+            ajax.open('GET', './AJAX/content.html');
+
+            // Step 3: define the ajax response callback method
+            ajax.onreadystatechange  = function() {
+                if (ajax.readyState == 4)  {
+                    document.getElementById('content').innerHTML = ajax.responseText;
+                }
+            }
+
+            // Step 4: send ajax the request for date
+			function getContent() {
+                ajax.send();
+                document.getElementById('btn_content').style.display = 'none';
+            }
+
+            function getFit() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("exercise").innerHTML = this.responseText;
+                }
+            };
+                xhttp.open("GET", "exercise.html", true);
+                xhttp.send();
+            }
+
+
+		</script>
+    </body>
+</html>
